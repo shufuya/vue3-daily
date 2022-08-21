@@ -6,7 +6,7 @@
     <template #title>{{ menuInfo.title }}</template>
     <template v-for="item in menuInfo.children" :key="item.id">
       <template v-if="!item.children">
-        <a-menu-item :key="item.id" @click="routerPush(item.path)">
+        <a-menu-item :key="item.id" @click="$utils.useRouterPush(item.path)">
           <template #icon>
             <component :is="item.icon"/>
           </template>
@@ -27,18 +27,14 @@ export default {
 </script>
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-const router = useRouter()
+import { inject } from "vue"
+const $utils = inject('$utils') as any
 const props =defineProps({
   menuInfo: {
     type: Object,
     default: () => ({}),
   },
 })
-const routerPush = (path:string) => {
-  router.push({
-    path
-  })
-}
 </script>
 
 <style scoped>

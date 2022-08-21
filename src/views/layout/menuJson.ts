@@ -14,7 +14,7 @@ const menuJson = [
     id: "1",
     children: [
       { 
-        id:"1-1",
+        id:"2",
         title:'Echarts',
         path: '/home/echarts',
         icon: VideoCameraOutlined,
@@ -25,10 +25,10 @@ const menuJson = [
     path: '/home',
     icon: UserOutlined,
     title:'测试',
-    id: "2",
+    id: "3",
     children: [
       { 
-        id:"2-1",
+        id:"4",
         title:'Echarts',
         path: '/home/echarts',
         icon: VideoCameraOutlined,
@@ -37,10 +37,10 @@ const menuJson = [
         path: '/home',
         icon: UserOutlined,
         title:'测试',
-        id: "2-2",
+        id: "5",
         children: [
           { 
-            id:"2-2-1",
+            id:"6",
             title:'Echarts',
             path: '/home/echarts',
             icon: VideoCameraOutlined,
