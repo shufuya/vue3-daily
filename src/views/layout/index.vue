@@ -14,6 +14,7 @@
         padding: '24px',
         background: '#fff',
         minHeight: '280px',
+        overflow:'hidden',
       }">
         <router-view></router-view>
       </a-layout-content>
