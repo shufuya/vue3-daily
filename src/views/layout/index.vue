@@ -10,13 +10,30 @@
         <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
       </a-layout-header>
       <a-layout-content :style="{
-        margin: '24px 16px',
-        padding: '24px',
+        margin: '1.5rem 1rem',
+        padding: '1.5rem',
         background: '#fff',
-        minHeight: '280px',
+        minHeight: '17.5rem',
         overflow:'hidden',
       }">
-        <router-view></router-view>
+        <!-- <Transition enter-active-class="animate__animated animate__bounceInRight"
+          leave-active-class="animate__animated animate__backOutRight">
+          <router-view></router-view>
+        </Transition> -->
+        <router-view v-slot="{ Component }">
+          <transition enter-active-class="animate__animated animate__bounceInRight"
+            leave-active-class="animate__animated animate__backOutRight">
+            <keep-alive max="10">
+              <component :is="Component" />
+            </keep-alive>
+          </transition>
+        </router-view>
+        <!-- <transition enter-active-class="animate__animated animate__bounceInRight"
+          leave-active-class="animate__animated animate__backOutRight">
+          <keep-alive max="10">
+            <router-view />
+          </keep-alive>
+        </transition> -->
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -59,9 +76,9 @@ export default defineComponent({
 }
 
 .trigger {
-  font-size: 18px;
-  line-height: 64px;
-  padding: 0 24px;
+  font-size: 1.125rem;
+  line-height: 4rem;
+  padding: 0 1.5rem;
   cursor: pointer;
   transition: color 0.3s;
 }
@@ -71,9 +88,9 @@ export default defineComponent({
 }
 
 .logo {
-  height: 32px;
+  height: 2rem;
   background: rgba(255, 255, 255, 0.3);
-  margin: 16px;
+  margin: 1rem;
 }
 
 .site-layout .site-layout-background {

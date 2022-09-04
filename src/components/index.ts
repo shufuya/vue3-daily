@@ -1,22 +1,16 @@
+import { App } from 'vue'
+import Echarts from './Echarts'
 
-import Echarts from './Echarts/index.vue'
+const components = [ Echarts]
 
-const components = {
-  Echarts
+// 定义 install 方法， App 作为参数
+const install = (app: App): void => {
+  // 遍历注册所有组件
+  components.map((component) => app.component(component.name, component))
 }
 
-function install(Vue: any) {
-  // 全局注册扩展组件
-
-  Object.keys(components).forEach((key: any) => {
-    const component = components[key]
-
-    // 全局组件注册
-    Vue.component(component.name, component)
-  })
-}
 
 export default {
-  ...components,
   install
 }
+

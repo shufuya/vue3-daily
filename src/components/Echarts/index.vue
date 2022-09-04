@@ -38,11 +38,17 @@ const props = withDefaults(defineProps<{
     ]
   }
 })
-
+const show = () => {
+  console.log(1111);
+}
+defineExpose({ show })
 onMounted(() => {
   const myChart = $echarts.init(echart.value);
   myChart.setOption(props.echartsOption);
 })
+const time = await setTimeout(() => {
+  console.log("test");
+},2000)
 </script>
 
 <style lang="scss" scoped>

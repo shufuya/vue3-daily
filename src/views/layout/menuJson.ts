@@ -22,15 +22,15 @@ const menuJson = [
     ]
   },
   {
-    path: '/home',
+    path: '/test',
     icon: UserOutlined,
     title:'测试',
     id: "3",
     children: [
       { 
         id:"4",
-        title:'Echarts',
-        path: '/home/echarts',
+        title:'List',
+        path: '/test/List',
         icon: VideoCameraOutlined,
       },
       {

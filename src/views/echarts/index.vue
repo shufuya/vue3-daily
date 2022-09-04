@@ -1,16 +1,26 @@
 <template>
-  <div style="display: flex;justify-content: space-between;">
-    <a-card style="width: 500px" hoverable>
-      <Echarts :echartsOption="firstEchart" height="400px"></Echarts>
-
-    </a-card>
-    <a-card style="width: 500px" hoverable>
-      <Echarts :echartsOption="secondEchart" height="400px"></Echarts>
-    </a-card>
+  <div>
+    <div style="display: flex;justify-content: space-between;">
+      <Suspense>
+        <template #default>
+          <a-card style="width: 500px" hoverable>
+            <AsyncPopup :echartsOption="firstEchart" ref="ea" height="400px"></AsyncPopup>
+          </a-card>
+        </template>
+        <template #fallback>
+          <a-skeleton active />
+        </template>
+      </Suspense>
+    </div>
+    <!-- {{ ea }} -->
+    <a-button @click="showChildren">点击</a-button>
+    <a-button @click="stopWatch">取消</a-button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref, watchEffect,defineAsyncComponent } from 'vue';
+const ea = ref(null) as any
 const firstEchart = {
   tooltip: {
     trigger: 'axis',
@@ -75,6 +85,39 @@ const secondEchart = {
     }
   ]
 };
+const Loading = () => import('@/components/Loading/index.vue')
+const AsyncPopup = defineAsyncComponent({
+  loader: () => import('@/components/Echarts/index.vue'),
+  // 加载异步组件时使用的组件
+  loadingComponent: Loading,
+  // 加载失败时使用的组件
+  errorComponent: Loading,
+  // 在显示加载组件之前延迟。默认值：200ms。
+  delay: 1000,
+  // 超过给定时间，则会显示错误组件。默认值：Infinity。
+  timeout: 3000
+})
+let time = ref(0)
+let unwatch: any = null
+onMounted(() => {
+  setTimeout(() => {
+    unwatch = watchEffect(() => {
+      if (time.value) {
+
+        console.log(time.value);
+      }
+    })
+  }, 100)
+})
+const showChildren = () => {
+  time.value++
+  ea.value.show()
+}
+const stopWatch = () => {
+  console.log(unwatch);
+  unwatch()
+}
+
 </script>
 
 <style lang="scss" scoped>

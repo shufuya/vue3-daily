@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, RouterOptions } from "vue-router"
 import layout from '@/views/layout/index.vue';
 const routes = [
     {
-        path: '/',
+        path: '/login',
         name: 'login',
         component: () => import('@/views/login/index.vue')
     },
@@ -13,6 +13,15 @@ const routes = [
           path: 'echarts',
           name:'echarts',
           component: () => import('@/views/echarts/index.vue'),
+        }]
+    },
+    {
+        path: '/test',
+        component: layout,
+        children:[{
+          path: 'List',
+          name:'list',
+          component: () => import('@/views/List/index.vue'),
         }]
     }
 ]
