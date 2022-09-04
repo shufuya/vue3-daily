@@ -6,6 +6,7 @@ import router from "./router"
 import * as echarts from 'echarts';
 import Components from './components' // 全局组件
 
+import 'animate.css'
 import 'ant-design-vue/dist/antd.css';
 import i18n from "@/i18n/index";
 import dayjs from 'dayjs'

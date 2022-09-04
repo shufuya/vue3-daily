@@ -1,17 +1,21 @@
 <template>
   <div>
-    <div style="display: flex;justify-content: space-between;">
-      <Suspense>
-        <template #default>
-          <a-card style="width: 500px" hoverable>
-            <AsyncPopup :echartsOption="firstEchart" ref="ea" height="400px"></AsyncPopup>
-          </a-card>
-        </template>
-        <template #fallback>
-          <a-skeleton active />
-        </template>
-      </Suspense>
-    </div>
+    <transition :duration="2000" enter-active-class="animate__animated animate__bounceInRight"
+      leave-active-class="animate__animated animate__backOutRight">
+
+      <div style="display: flex;justify-content: space-between; width: 100%;" v-if="echartsShow">
+        <Suspense>
+          <template #default>
+            <a-card style="width: 500px" hoverable>
+              <AsyncPopup :echartsOption="firstEchart" ref="ea" height="400px"></AsyncPopup>
+            </a-card>
+          </template>
+          <template #fallback>
+            <a-skeleton active />
+          </template>
+        </Suspense>
+      </div>
+    </transition>
     <!-- {{ ea }} -->
     <a-button @click="showChildren">点击</a-button>
     <a-button @click="stopWatch">取消</a-button>
@@ -99,6 +103,7 @@ const AsyncPopup = defineAsyncComponent({
 })
 let time = ref(0)
 let unwatch: any = null
+let echartsShow = ref(true)
 onMounted(() => {
   setTimeout(() => {
     unwatch = watchEffect(() => {
@@ -110,8 +115,10 @@ onMounted(() => {
   }, 100)
 })
 const showChildren = () => {
-  time.value++
-  ea.value.show()
+  // time.value++
+  // ea.value.show()
+  echartsShow.value = !echartsShow.value
+  console.log(echartsShow);
 }
 const stopWatch = () => {
   console.log(unwatch);
